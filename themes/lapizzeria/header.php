@@ -19,7 +19,7 @@
                 $args = array(
                     'theme_location' => 'social-menu',
                     'container'      => 'nav',
-                    'container_class' => 'socials-nav',
+                    'container_class' => 'socials',
                     'container_id'   => 'socials',
                     'link_before'    => '<span class="sr-text">',
                     'link_after'     => '</span>'
@@ -37,7 +37,10 @@
 </header>
 
 <div class="main-menu">
-    <div class="navigation">
+    <div class="mobile-menu">
+        <a href="#" class="mobile"><i class="fa fa-bars"></i>Menu</a>
+    </div>
+    <div class="navigation container">
         <?php
             $args = array(
                 'theme_location' => 'header-menu',
