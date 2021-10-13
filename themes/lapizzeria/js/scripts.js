@@ -12,3 +12,11 @@ jQuery(document).ready(function($) {
       }
   })
 })
+
+jQuery('.gallery a').each(function () {
+    jQuery(this).attr({'data-fluidbox': ''});
+});
+
+if(jQuery('[data-fluidbox]').length > 0) {
+    jQuery('[data-fluidbox]').fluidbox();
+}
