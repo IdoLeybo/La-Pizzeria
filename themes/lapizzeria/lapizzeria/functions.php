@@ -24,23 +24,34 @@ function lapizzeria_styles() {
     wp_register_style('normalize', get_template_directory_uri() . '/css/normalize.css', array(), '8.0.1');
     wp_register_style('fluidboxcss', get_template_directory_uri() . '/css/fluidbox.min.css', array(), '1.0.0');
     wp_register_style('fontawesome', get_template_directory_uri() . '/css/font-awesome.css', array(), '4.7.0');
+    wp_register_style('datetime-local', get_template_directory_uri() . '/css/datetime-local-polyfill.css', array(), '1.0.0');
     wp_register_style('style', get_template_directory_uri() . '/style.css', array('normalize'), '1.0');
 
     // Enqueue the styles
     wp_enqueue_style('normalize');
     wp_enqueue_style('fluidboxcss');
     wp_enqueue_style('fontawesome');
+    wp_enqueue_style('datetime-local');
     wp_enqueue_style('googlefont');
     wp_enqueue_style('style');
 
     /** Load JS Files */
 
     wp_register_script('fluidboxjs', get_template_directory_uri() . '/js/jquery.fluidbox.min.js', array('jquery'), '1.0.0', true);
+    wp_register_script('datetime-local', get_template_directory_uri() . '/js/datetime-local-polyfill.min.js', array('jquery', 'jquery-ui-core','jquery-ui-datepicker', 'modernizr'), '1.0.0', true);
+//    wp_register_script('modernizr', 'https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js', array('jquery'), '2.8.3', true);
+//    wp_register_script('googlemaps', 'http://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&callback=initMap', array(), '', true);
     //SlickNav Js
     wp_register_script('script', get_template_directory_uri() . '/js/scripts.js', array('jquery'), '1.0.0', true);
+
     //Enqueue the Script
     wp_enqueue_script('jquery');
+    wp_enqueue_script('jquery-ui-core');
+    wp_enqueue_script('jquery-ui-datepicker');
+    wp_enqueue_script('datetime-local');
+//    wp_enqueue_script('modernizr');
     wp_enqueue_script('fluidboxjs');
+//    wp_enqueue_script('googlemaps');
     wp_enqueue_script('script');
 
     wp_localize_script(
@@ -105,7 +116,6 @@ function lapizzeria_specialties() {
 add_action( 'init', 'lapizzeria_specialties' );
 
 //Widgets Zone
-
 function lapizzeria_widgets() {
     register_sidebar( array(
        'name' =>  'Blog Sidebar',
@@ -118,3 +128,10 @@ function lapizzeria_widgets() {
 }
 add_action('widgets_init', 'lapizzeria_widgets');
 
+function add_async_defer($tag, $handle) {
+    if('googlemaps' !== $handle) {
+        return $tag;
+    }
+    return str_replace('src', 'async="async" defer="defer" src', $tag);
+}
+add_filter('script_loader_tag', 'add_async_defer', 10, 2);

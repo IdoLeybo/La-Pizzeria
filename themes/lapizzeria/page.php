@@ -10,7 +10,7 @@
             </div>
 
             <div class="main-content container">
-                <main class="text-center content-center">
+                <main class="text-center content-center clear">
                     <?php the_content(); ?>
                 </main>
             </div>
