@@ -32,7 +32,6 @@ function lapizzeria_styles() {
 }
 add_action('wp_enqueue_scripts', 'lapizzeria_styles');
 
-
 // Add Menus
 function lapizzeria_menus() {
     register_nav_menus(array(
@@ -80,5 +79,4 @@ function lapizzeria_specialties() {
 
     register_post_type( 'specialties', $args );
 }
-
 add_action( 'init', 'lapizzeria_specialties' );
